@@ -147,7 +147,7 @@ export default async function HomePage() {
       <section className="bg-gradient-to-r from-brand-cyan-dark via-brand-cyan-mid to-brand-cyan py-24 px-6 md:px-10 text-center">
         <div className="max-w-2xl mx-auto rounded-2xl border border-white/25 bg-black/10 px-6 py-10 md:px-10 md:py-12">
           <p className="mb-4 text-xs uppercase tracking-[0.13em] text-brand-cyan-light">
-            Arena Inmobiliaria · 4,9/5 en Google (43 reseñas)
+            Arena Inmobiliaria · 5,0/5 en Google
           </p>
           <h2 className="mb-6 font-display text-4xl font-semibold leading-tight text-white md:text-5xl">
             ¿Listo para encontrar<br />tu próximo hogar?
