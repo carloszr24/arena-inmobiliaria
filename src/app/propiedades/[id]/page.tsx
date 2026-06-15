@@ -26,19 +26,52 @@ const statusColors: Record<string, string> = {
   vendido: 'bg-stone-100 text-stone-500 border-stone-200',
 }
 
+function PropertyHeader({ property }: { property: Property }) {
+  return (
+    <>
+      <div className="flex flex-wrap items-center gap-2 mb-4">
+        <span
+          className={cn(
+            'text-xs font-medium px-2.5 py-1 border',
+            statusColors[property.status] || statusColors.disponible
+          )}
+        >
+          {STATUS_LABELS[property.status] || property.status}
+        </span>
+        <span className="text-xs bg-stone-100 text-stone-600 px-2.5 py-1">
+          {TYPE_LABELS[property.type] || property.type}
+        </span>
+        <span className="text-xs bg-stone-100 text-stone-600 px-2.5 py-1">
+          {OPERATION_LABELS[property.operation || 'venta'] || property.operation || 'Venta'}
+        </span>
+      </div>
+
+      <h1 className="font-display text-3xl font-light text-stone-900 leading-tight mb-2">
+        {property.title}
+      </h1>
+
+      <p className="text-stone-500 text-sm mb-6">
+        <span className="mr-1 text-stone-300">—</span> {property.location}
+      </p>
+    </>
+  )
+}
+
 function PropertySpecs({
   property,
   floorLabel,
   hasElevator,
   showFloorCard,
+  className,
 }: {
   property: Property
   floorLabel?: string
   hasElevator: boolean
   showFloorCard: boolean
+  className?: string
 }) {
   return (
-    <div className="grid grid-cols-2 gap-3">
+    <div className={cn('grid grid-cols-2 gap-3', className)}>
       {property.sqMeters && (
         <div className="text-center p-4 border border-stone-100">
           <p className="text-xl font-light text-stone-900">{property.sqMeters}</p>
@@ -81,85 +114,35 @@ function PropertyPrice({ property }: { property: Property }) {
   )
 }
 
-function PropertySummary({
-  property,
-  floorLabel,
-  hasElevator,
-  showFloorCard,
-  whatsappUrl,
-}: {
-  property: Property
-  floorLabel?: string
-  hasElevator: boolean
-  showFloorCard: boolean
-  whatsappUrl: string
-}) {
+function PropertyCTAs({ property, whatsappUrl }: { property: Property; whatsappUrl: string }) {
   return (
-    <>
-      <div className="flex flex-wrap items-center gap-2 mb-4">
-        <span
-          className={cn(
-            'text-xs font-medium px-2.5 py-1 border',
-            statusColors[property.status] || statusColors.disponible
-          )}
-        >
-          {STATUS_LABELS[property.status] || property.status}
-        </span>
-        <span className="text-xs bg-stone-100 text-stone-600 px-2.5 py-1">
-          {TYPE_LABELS[property.type] || property.type}
-        </span>
-        <span className="text-xs bg-stone-100 text-stone-600 px-2.5 py-1">
-          {OPERATION_LABELS[property.operation || 'venta'] || property.operation || 'Venta'}
-        </span>
-      </div>
-
-      <h1 className="font-display text-3xl font-light text-stone-900 leading-tight mb-2">
-        {property.title}
-      </h1>
-
-      <p className="text-stone-500 text-sm mb-6">
-        <span className="mr-1 text-stone-300">—</span> {property.location}
-      </p>
-
-      <div className="mb-6">
-        <PropertySpecs
-          property={property}
-          floorLabel={floorLabel}
-          hasElevator={hasElevator}
-          showFloorCard={showFloorCard}
-        />
-      </div>
-
-      <PropertyPrice property={property} />
-
-      <div className="space-y-3 mt-6">
+    <div className="space-y-3">
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn-primary w-full text-center text-sm py-4"
+      >
+        Solicitar información
+      </a>
+      {property.fotocasaUrl && (
         <a
-          href={whatsappUrl}
+          href={property.fotocasaUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-primary w-full text-center text-sm py-4"
+          className="w-full block text-center text-sm py-4 border border-brand-cyan-dark text-brand-cyan-dark hover:bg-brand-cyan-dark hover:text-white transition-colors duration-200"
         >
-          Solicitar información
+          Ver anuncio completo ↗
         </a>
-        {property.fotocasaUrl && (
-          <a
-            href={property.fotocasaUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full block text-center text-sm py-4 border border-brand-cyan-dark text-brand-cyan-dark hover:bg-brand-cyan-dark hover:text-white transition-colors duration-200"
-          >
-            Ver en portal inmobiliario ↗
-          </a>
-        )}
-        <a
-          href={phoneHref}
-          className="inline-flex w-full items-center justify-center gap-2 text-sm py-4 border border-stone-300 text-stone-700 hover:border-stone-900 hover:text-stone-900 transition-colors duration-200"
-        >
-          <PhoneIcon />
-          +34 {CONTACT.phone.display}
-        </a>
-      </div>
-    </>
+      )}
+      <a
+        href={phoneHref}
+        className="inline-flex w-full items-center justify-center gap-2 text-sm py-4 border border-stone-300 text-stone-700 hover:border-stone-900 hover:text-stone-900 transition-colors duration-200"
+      >
+        <PhoneIcon />
+        +34 {CONTACT.phone.display}
+      </a>
+    </div>
   )
 }
 
@@ -182,6 +165,7 @@ export default async function PropertyDetailPage({
   const showFloorCard = Boolean(floorLabel || hasElevator)
   const whatsappText = `Hola! Me gustaría solicitar información sobre ${property.title}`
   const whatsappUrl = `${whatsappHref}?text=${encodeURIComponent(whatsappText)}`
+  const specsProps = { property, floorLabel, hasElevator, showFloorCard }
   const featureItems = [
     { label: 'Tipo de inmueble', value: TYPE_LABELS[property.type] || property.type },
     { label: 'Disponibilidad', value: property.availability },
@@ -208,14 +192,6 @@ export default async function PropertyDetailPage({
     },
   ].filter((item) => item.value)
 
-  const summaryProps = {
-    property,
-    floorLabel,
-    hasElevator,
-    showFloorCard,
-    whatsappUrl,
-  }
-
   return (
     <div className="pt-16">
       <div className="max-w-7xl mx-auto px-6 md:px-10 pt-8 pb-4">
@@ -233,8 +209,12 @@ export default async function PropertyDetailPage({
           <div className="lg:col-span-3">
             <PropertyImageViewer images={images} title={property.title} />
 
-            <div className="lg:hidden mt-6">
-              <PropertySummary {...summaryProps} />
+            {/* Móvil: resumen encima del precio */}
+            <div className="lg:hidden mt-6 space-y-6">
+              <PropertyHeader property={property} />
+              <PropertySpecs {...specsProps} />
+              <PropertyPrice property={property} />
+              <PropertyCTAs property={property} whatsappUrl={whatsappUrl} />
             </div>
 
             <div className="mt-8">
@@ -257,9 +237,13 @@ export default async function PropertyDetailPage({
             )}
           </div>
 
+          {/* Escritorio: orden original (precio antes de especificaciones) */}
           <div className="hidden lg:block lg:col-span-2">
-            <div className="sticky top-24">
-              <PropertySummary {...summaryProps} />
+            <div className="sticky top-24 space-y-6">
+              <PropertyHeader property={property} />
+              <PropertyPrice property={property} />
+              <PropertySpecs {...specsProps} className="sm:grid-cols-4" />
+              <PropertyCTAs property={property} whatsappUrl={whatsappUrl} />
             </div>
           </div>
         </div>

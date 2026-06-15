@@ -54,7 +54,7 @@ export default async function HomePage() {
             en <span className="text-brand-cyan-light [text-shadow:0_2px_10px_rgba(0,0,0,0.5)]">menos de 60 días</span>
           </h1>
           <p className="text-stone-200 text-base sm:text-lg md:text-xl font-normal max-w-[min(100%,22rem)] sm:max-w-2xl mx-auto mb-6 md:mb-7 leading-relaxed text-pretty animate-fade-up" style={{ animationDelay: '0.1s', opacity: 0, animationFillMode: 'forwards' }}>
-            Te acompaño desde el inicio hasta el final de la operación con un servicio totalmente personalizado
+            Te acompañamos desde el inicio hasta el final de la operación con un servicio totalmente personalizado
           </p>
           <div
             className="flex w-full max-w-xl mx-auto flex-col sm:flex-row gap-3 sm:gap-4 animate-fade-up"
@@ -147,20 +147,20 @@ export default async function HomePage() {
       <section className="bg-gradient-to-r from-brand-cyan-dark via-brand-cyan-mid to-brand-cyan py-24 px-6 md:px-10 text-center">
         <div className="max-w-2xl mx-auto rounded-2xl border border-white/25 bg-black/10 px-6 py-10 md:px-10 md:py-12">
           <p className="mb-4 text-xs uppercase tracking-[0.13em] text-brand-cyan-light">
-            Arena Inmobiliaria · 5,0/5 en Google
+            5,0/5 en Google
           </p>
           <h2 className="mb-6 font-display text-4xl font-semibold leading-tight text-white md:text-5xl">
             ¿Listo para encontrar<br />tu próximo hogar?
           </h2>
           <p className="mb-10 text-lg font-light leading-relaxed text-white/90">
-            Cuéntame qué necesitas y prepararemos la mejor estrategia para ti.
+            Cuéntanos qué necesitas y prepararemos la mejor estrategia para ti.
           </p>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/contacto"
               className="inline-flex min-h-[3rem] items-center justify-center rounded-md border border-transparent bg-white px-10 py-3 text-sm font-medium tracking-wide text-brand-cyan-dark hover:bg-brand-cyan-light transition-colors duration-200"
             >
-              Hablar con Arena
+              Hablar con nosotros
             </Link>
             <Link
               href="/propiedades"
