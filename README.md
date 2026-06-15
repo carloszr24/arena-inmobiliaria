@@ -1,6 +1,6 @@
-# PlenoCasa — Inmobiliaria Web
+# Arena Inmobiliaria — Web
 
-Next.js + TypeScript + Tailwind + **Supabase** (Postgres + cliente oficial)
+Next.js + TypeScript + Tailwind. Catálogo de propiedades en archivo local (`src/data/properties.ts`).
 
 ---
 
@@ -12,39 +12,18 @@ Next.js + TypeScript + Tailwind + **Supabase** (Postgres + cliente oficial)
 npm install
 ```
 
-### 2. Supabase: tabla y RLS
-
-1. Crea un proyecto en [Supabase](https://supabase.com).
-2. **SQL Editor** → pega y ejecuta el contenido de:
-   - [`supabase/migrations/20260407120000_properties.sql`](supabase/migrations/20260407120000_properties.sql)
-   - [`supabase/migrations/20260423170000_leads.sql`](supabase/migrations/20260423170000_leads.sql)
-3. **Storage** → crea un bucket llamado **`property-images`** y márcalo como **Public** (para fotos de propiedades).
-
-### 3. Variables de entorno
+### 2. Variables de entorno
 
 ```bash
 cp .env.example .env
 ```
 
-Rellena con **Project Settings → API**:
-
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY` (anon / public)
-- `SUPABASE_SERVICE_ROLE_KEY` (service_role; solo servidor)
-- `ADMIN_PASSWORD` (acceso a `/admin`)
-- `RESEND_API_KEY` (opcional, alertas por email de nuevos leads)
+- `ADMIN_PASSWORD` — acceso a `/admin`
+- `RESEND_API_KEY` (opcional) — alertas por email de nuevos leads
 - `RESEND_FROM_EMAIL` (opcional)
 - `LEADS_NOTIFICATION_EMAIL` (opcional)
 
-### 4. Datos de ejemplo (opcional)
-
-```bash
-npm run db:seed
-```
-
-(Requiere Node 20+ por `node --env-file=.env`, o exporta las variables a mano.)
-
-### 5. Desarrollo
+### 3. Desarrollo
 
 ```bash
 npm run dev
@@ -52,22 +31,22 @@ npm run dev
 
 - Web: [http://localhost:3000](http://localhost:3000)
 - Admin propiedades: `/admin`
-- Admin leads: `/admin/leads`
+
+### 4. Propiedades
+
+Edita [`src/data/properties.ts`](src/data/properties.ts) o sube imágenes a `public/images/properties/`.
 
 ---
 
 ## Despliegue en Vercel
 
 1. Conecta el repo en [Vercel](https://vercel.com).
-2. **Environment Variables** (Production y Preview si aplica): las mismas que en `.env`.
+2. **Environment Variables**: `ADMIN_PASSWORD` y, si quieres alertas de leads, las de Resend.
 3. Deploy: `next build` (por defecto).
-
-No hace falta `DATABASE_URL` ni Prisma: la app usa el cliente Supabase.
 
 ---
 
 ## Stack
 
 - Next.js 14 (App Router)
-- Supabase JS (`@supabase/supabase-js`)
 - Tailwind CSS

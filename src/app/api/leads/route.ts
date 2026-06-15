@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createAdminSupabase } from '@/lib/supabase/admin'
 import { getAdminTokenFromRequest, verifyAdminSessionToken } from '@/lib/admin-session'
-import { LEAD_INTENTS, LEAD_PRIORITIES, LEAD_SOURCES, LEAD_STATUSES, rowsToLeads, type LeadRow } from '@/lib/leads'
+import { LEAD_INTENTS, LEAD_PRIORITIES, LEAD_SOURCES, LEAD_STATUSES } from '@/lib/leads'
+import type { Lead } from '@/types'
 
 function unauthorized() {
   return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
@@ -46,24 +46,43 @@ async function sendLeadEmailNotification(payload: {
   }).catch(() => null)
 }
 
+function createLeadResponse(body: {
+  fullName: string
+  phone: string
+  email: string | null
+  notes: string | null
+  source: string
+  intent: string
+  priority: string
+  propertyRef: string | null
+  saleTimeline: string | null
+}): Lead {
+  const now = new Date()
+  return {
+    id: crypto.randomUUID(),
+    fullName: body.fullName,
+    email: body.email,
+    phone: body.phone,
+    source: body.source as Lead['source'],
+    intent: body.intent as Lead['intent'],
+    status: 'nuevo',
+    priority: body.priority as Lead['priority'],
+    propertyRef: body.propertyRef,
+    notes: body.notes,
+    saleTimeline: body.saleTimeline,
+    assignedTo: null,
+    firstResponseAt: null,
+    lastContactAt: null,
+    createdAt: now,
+    updatedAt: now,
+  }
+}
+
 export async function GET(request: NextRequest) {
   if (!verifyAdminSessionToken(getAdminTokenFromRequest(request))) {
     return unauthorized()
   }
-
-  try {
-    const supabase = createAdminSupabase()
-    const { data, error } = await supabase
-      .from('leads')
-      .select('*')
-      .order('created_at', { ascending: false })
-      .limit(500)
-
-    if (error) throw error
-    return NextResponse.json(rowsToLeads(data as LeadRow[] | null))
-  } catch {
-    return NextResponse.json({ error: 'Error al obtener leads' }, { status: 500 })
-  }
+  return NextResponse.json([])
 }
 
 export async function POST(request: NextRequest) {
@@ -92,26 +111,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Prioridad no valida' }, { status: 400 })
     }
 
-    const supabase = createAdminSupabase()
-    const { data, error } = await supabase
-      .from('leads')
-      .insert({
-        full_name: fullName,
-        phone,
-        email,
-        notes,
-        source,
-        intent,
-        priority,
-        property_ref: propertyRef,
-        sale_timeline: saleTimeline,
-        status: 'nuevo',
-      })
-      .select('*')
-      .single()
-
-    if (error) throw error
-
     await sendLeadEmailNotification({
       fullName,
       phone,
@@ -121,7 +120,20 @@ export async function POST(request: NextRequest) {
       notes: notes || undefined,
     })
 
-    return NextResponse.json(rowsToLeads([data as LeadRow])[0], { status: 201 })
+    return NextResponse.json(
+      createLeadResponse({
+        fullName,
+        phone,
+        email,
+        notes,
+        source,
+        intent,
+        priority,
+        propertyRef,
+        saleTimeline,
+      }),
+      { status: 201 }
+    )
   } catch {
     return NextResponse.json({ error: 'Error al crear lead' }, { status: 500 })
   }
@@ -132,46 +144,9 @@ export async function PATCH(request: NextRequest) {
     return unauthorized()
   }
 
-  try {
-    const body = await request.json()
-    const id = String(body.id || '').trim()
-    if (!id) return NextResponse.json({ error: 'ID no valido' }, { status: 400 })
-
-    const updates: Record<string, string | null> = {}
-    if (body.status) {
-      const status = String(body.status)
-      if (!LEAD_STATUSES.includes(status as (typeof LEAD_STATUSES)[number])) {
-        return NextResponse.json({ error: 'Estado no valido' }, { status: 400 })
-      }
-      updates.status = status
-      if (status === 'contactado' && !body.firstResponseAt) {
-        updates.first_response_at = new Date().toISOString()
-      }
-    }
-    if (body.priority) {
-      const priority = String(body.priority)
-      if (!LEAD_PRIORITIES.includes(priority as (typeof LEAD_PRIORITIES)[number])) {
-        return NextResponse.json({ error: 'Prioridad no valida' }, { status: 400 })
-      }
-      updates.priority = priority
-    }
-    if (body.notes !== undefined) updates.notes = String(body.notes || '').trim() || null
-    if (body.assignedTo !== undefined) updates.assigned_to = String(body.assignedTo || '').trim() || null
-    if (body.lastContactAt) updates.last_contact_at = new Date(body.lastContactAt).toISOString()
-    updates.updated_at = new Date().toISOString()
-
-    const supabase = createAdminSupabase()
-    const { data, error } = await supabase
-      .from('leads')
-      .update(updates)
-      .eq('id', id)
-      .select('*')
-      .single()
-
-    if (error) throw error
-    return NextResponse.json(rowsToLeads([data as LeadRow])[0])
-  } catch {
-    return NextResponse.json({ error: 'Error al actualizar lead' }, { status: 500 })
-  }
+  void request
+  return NextResponse.json(
+    { error: 'La edicion de leads requiere almacenamiento persistente (no disponible).' },
+    { status: 501 }
+  )
 }
-

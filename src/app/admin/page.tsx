@@ -22,16 +22,13 @@ function safeParseImages(images: string): string[] {
   }
 }
 
-function isSupabasePublicUrl(url: string): boolean {
-  return url.includes('/storage/v1/object/public/property-images/')
+function isLocalPropertyImage(url: string): boolean {
+  return url.startsWith('/images/properties/')
 }
 
-function supabasePathFromPublicUrl(url: string): string | null {
-  // https://<ref>.supabase.co/storage/v1/object/public/property-images/<path>
-  const marker = '/storage/v1/object/public/property-images/'
-  const idx = url.indexOf(marker)
-  if (idx === -1) return null
-  return url.slice(idx + marker.length)
+function localPathFromPublicUrl(url: string): string | null {
+  if (!isLocalPropertyImage(url)) return null
+  return url.replace(/^\/images\//, '')
 }
 
 const emptyForm = {
@@ -283,8 +280,8 @@ export default function AdminPage() {
   const deleteRemovedImages = async (finalUrls: string[]) => {
     const removed = initialImageUrls.filter((u) => !finalUrls.includes(u))
     for (const url of removed) {
-      if (!isSupabasePublicUrl(url)) continue
-      const path = supabasePathFromPublicUrl(url)
+      if (!isLocalPropertyImage(url)) continue
+      const path = localPathFromPublicUrl(url)
       if (!path) continue
       await fetch('/api/uploads/property-image', {
         method: 'DELETE',

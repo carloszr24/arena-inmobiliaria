@@ -17,6 +17,8 @@
 .DS_Store
 *.pem
 .cursor/
+output/
+test-empresa/
 
 # debug
 npm-debug.log*
