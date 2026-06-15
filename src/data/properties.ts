@@ -79,4 +79,46 @@ En cumplimiento del Decreto 218/2005 del 11 de octubre, se informa al cliente qu
     createdAt: new Date('2026-06-15T12:30:00.000Z'),
     updatedAt: new Date('2026-06-15T12:30:00.000Z'),
   },
+  {
+    id: 'piso-jerez-roci-milagrosa',
+    title: 'Piso en venta en El Rocío - La Milagrosa, Jerez de la Frontera',
+    price: 235_000,
+    location: 'El Rocío - La Milagrosa, Jerez de la Frontera (Cádiz)',
+    type: 'piso',
+    operation: 'venta',
+    status: 'disponible',
+    description: `¿Buscas piso en Avenida Rey Juan Carlos I? Jerez de la Frontera.
+
+Vivienda de dos habitaciones con armarios empotrados, salón-comedor con terraza, cocina, dos baños (uno de ellos en la habitación principal) y trastero.
+
+Además cuenta con plaza de aparcamiento subterráneo.
+
+Aire centralizado. Piscina comunitaria.
+
+Ubicado en una de las zonas más demandadas de la ciudad, con varios supermercados muy próximos, múltiples comercios locales, colegios, institutos, parques, gimnasio, servicios públicos, etc.
+
+Equipamiento: aire acondicionado, terraza, trastero y armarios empotrados. Segunda mano en buen estado. Solo acceso exterior adaptado para personas con movilidad reducida.
+
+Contacto para visitas: 675 02 00 23 o 856 61 08 71. También por WhatsApp o mensaje privado.
+
+En cumplimiento del Decreto 218/2005 del 11 de octubre, se informa al cliente que los gastos notariales, registrales, ITP, honorarios de intermediación, gastos financieros y otros gastos inherentes a la compraventa no están incluidos en el precio.`,
+    images: JSON.stringify([
+      '/images/propiedad3jerez.png',
+      '/images/propiedad3jerez-1.png',
+      '/images/propiedad3jerez-2.png',
+    ]),
+    fotocasaUrl: null,
+    bedrooms: 2,
+    bathrooms: 2,
+    sqMeters: 78,
+    availability: 'Sin restricciones',
+    condition: 'Buen estado',
+    floor: '1ª planta interior',
+    garage: 'Plaza de garaje incluida',
+    elevator: 'Sí',
+    furnished: 'No',
+    featured: true,
+    createdAt: new Date('2026-06-15T13:00:00.000Z'),
+    updatedAt: new Date('2026-06-15T13:00:00.000Z'),
+  },
 ]
