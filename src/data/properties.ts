@@ -41,4 +41,42 @@ En cumplimiento del Decreto 218/2005 del 11 de octubre, se informa al cliente qu
     createdAt: now,
     updatedAt: now,
   },
+  {
+    id: 'chalet-adosado-chipiona-argentina',
+    title: 'Chalet adosado en venta en Argentina, Chipiona',
+    price: 260_000,
+    location: 'Centro, Chipiona (Cádiz)',
+    type: 'chalet',
+    operation: 'venta',
+    status: 'disponible',
+    description: `Vivienda unifamiliar adosada en venta en Chipiona.
+
+La vivienda se encuentra en una parcela de 129,95 m² y cuenta con 98 m² construidos distribuidos en recibidor, salón-comedor, cocina, lavadero, aseo y un dormitorio en planta baja. La planta alta se distribuye en distribuidor, tres habitaciones, cuarto de baño y una terraza que se ha convertido en vestidor del dormitorio principal.
+
+La zona no edificada está destinada a patio delantero y patio trasero.
+
+Equipamiento: aire acondicionado, jardín y armarios empotrados. Segunda mano en buen estado. Solo acceso exterior adaptado para personas con movilidad reducida.
+
+Contacto para visitas: 675 02 00 23 o 856 61 08 71. También por WhatsApp o mensaje privado.
+
+En cumplimiento del Decreto 218/2005 del 11 de octubre, se informa al cliente que los gastos notariales, registrales, ITP, honorarios de intermediación, gastos financieros y otros gastos inherentes a la compraventa no están incluidos en el precio.`,
+    images: JSON.stringify([
+      '/images/propiedad2jerez.png',
+      '/images/propiedad2jerez-1.png',
+      '/images/propiedad2jerez-2.png',
+      '/images/propiedad2jerez-3.png',
+    ]),
+    fotocasaUrl: null,
+    bedrooms: 4,
+    bathrooms: 2,
+    sqMeters: 98,
+    availability: 'Sin restricciones',
+    condition: 'Buen estado',
+    floor: '2 plantas',
+    elevator: 'No',
+    furnished: 'No',
+    featured: true,
+    createdAt: new Date('2026-06-15T12:30:00.000Z'),
+    updatedAt: new Date('2026-06-15T12:30:00.000Z'),
+  },
 ]
