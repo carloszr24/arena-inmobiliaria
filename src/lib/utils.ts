@@ -23,7 +23,7 @@ export function parseImages(images: string): string[] {
   }
 }
 
-export const PROPERTY_TYPES = ['piso', 'casa', 'local', 'terreno', 'oficina'] as const
+export const PROPERTY_TYPES = ['piso', 'atico', 'casa', 'local', 'terreno', 'oficina'] as const
 export const PROPERTY_OPERATIONS = ['venta', 'alquiler'] as const
 export const PROPERTY_STATUSES = ['disponible', 'reservado', 'vendido'] as const
 
@@ -35,6 +35,7 @@ export const STATUS_LABELS: Record<string, string> = {
 
 export const TYPE_LABELS: Record<string, string> = {
   piso: 'Piso',
+  atico: 'Ático',
   casa: 'Casa',
   local: 'Local',
   terreno: 'Terreno',
