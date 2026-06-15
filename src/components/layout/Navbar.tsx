@@ -83,17 +83,17 @@ export function Navbar() {
       )}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <div className="relative flex items-center h-16">
+        <div className="relative flex items-center h-[4.5rem] md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center shrink-0">
             <Image
               src="/images/logo-arena-inmobiliaria.png"
               alt={`${AGENT.name} logo`}
-              width={220}
-              height={58}
+              width={300}
+              height={80}
               priority
               className={cn(
-                'h-10 w-auto md:h-11 transition-opacity duration-200',
+                'h-14 w-auto md:h-[4.25rem] lg:h-[4.5rem] transition-opacity duration-200',
                 transparent ? 'opacity-95' : 'opacity-100'
               )}
             />

@@ -198,7 +198,7 @@ export default async function PropertyDetailPage({
                     href={property.fotocasaUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full block text-center text-sm py-4 border border-brand-red text-brand-red hover:bg-brand-red hover:text-white transition-colors duration-200"
+                    className="w-full block text-center text-sm py-4 border border-brand-cyan-dark text-brand-cyan-dark hover:bg-brand-cyan-dark hover:text-white transition-colors duration-200"
                   >
                     Ver en portal inmobiliario ↗
                   </a>

@@ -130,7 +130,7 @@ export default function ContactoPage() {
                       onChange={handleChange}
                       required
                       placeholder="Tu nombre"
-                      className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-brand-red transition-colors"
+                      className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-brand-cyan-dark transition-colors"
                     />
                   </div>
                   <div>
@@ -142,7 +142,7 @@ export default function ContactoPage() {
                       onChange={handleChange}
                       required
                       placeholder="tu@email.com"
-                      className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-brand-red transition-colors"
+                      className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-brand-cyan-dark transition-colors"
                     />
                   </div>
                 </div>
@@ -154,7 +154,7 @@ export default function ContactoPage() {
                     value={form.telefono}
                     onChange={handleChange}
                     placeholder="+34 600 000 000"
-                    className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-brand-red transition-colors"
+                    className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-brand-cyan-dark transition-colors"
                   />
                 </div>
 
@@ -167,7 +167,7 @@ export default function ContactoPage() {
                     required
                     rows={6}
                     placeholder="Cuéntanos qué necesitas..."
-                    className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-brand-red transition-colors resize-none"
+                    className="w-full border border-stone-200 px-4 py-3 text-sm focus:outline-none focus:border-brand-cyan-dark transition-colors resize-none"
                   />
                 </div>
 

@@ -40,11 +40,9 @@ export default async function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative h-svh min-h-[32rem] flex items-center justify-center overflow-hidden pt-16 pb-8 md:pt-20 md:pb-10">
-        {/* Background */}
+      <section className="relative h-svh min-h-[32rem] flex items-center justify-center overflow-hidden pt-[4.5rem] pb-8 md:pt-20 md:pb-10">
         <div className="absolute inset-0">
           <HeroCarousel />
-          <div className="absolute inset-0 bg-gradient-to-b from-stone-950/70 via-stone-950/55 to-stone-950/75" />
         </div>
 
         {/* Content */}
@@ -53,7 +51,7 @@ export default async function HomePage() {
             Compra o vende tu vivienda en Jerez
             <span className="hidden md:inline"> </span>
             <br className="md:hidden" aria-hidden="true" />
-            en <span className="text-rose-100 [text-shadow:0_2px_10px_rgba(0,0,0,0.5)]">menos de 60 días</span>
+            en <span className="text-brand-cyan-light [text-shadow:0_2px_10px_rgba(0,0,0,0.5)]">menos de 60 días</span>
           </h1>
           <p className="text-stone-200 text-base sm:text-lg md:text-xl font-normal max-w-[min(100%,22rem)] sm:max-w-2xl mx-auto mb-6 md:mb-7 leading-relaxed text-pretty animate-fade-up" style={{ animationDelay: '0.1s', opacity: 0, animationFillMode: 'forwards' }}>
             Te acompaño desde el inicio hasta el final de la operación con un servicio totalmente personalizado
@@ -70,7 +68,7 @@ export default async function HomePage() {
             </Link>
             <ValoracionGratuitaModal
               triggerLabel="Quiero vender"
-              triggerClassName="inline-flex w-full sm:flex-1 sm:min-w-0 min-h-[3rem] md:min-h-[3.25rem] items-center justify-center px-8 py-3.5 md:py-4 text-sm md:text-base tracking-wide font-medium border-2 border-white text-white box-border hover:bg-white hover:text-stone-900 transition-colors duration-200"
+              triggerClassName="inline-flex w-full sm:flex-1 sm:min-w-0 min-h-[3rem] md:min-h-[3.25rem] items-center justify-center px-8 py-3.5 md:py-4 text-sm md:text-base tracking-wide font-medium border-2 border-brand-cyan-light text-white box-border hover:bg-brand-cyan-light hover:text-stone-900 transition-colors duration-200"
             />
           </div>
         </div>
@@ -133,7 +131,7 @@ export default async function HomePage() {
                 desc: 'Negociación, documentación y acompañamiento para una decisión segura.',
               },
             ].map((item) => (
-              <div key={item.title} className="rounded-xl p-8 border border-stone-700 bg-stone-950/40 hover:border-brand-red transition-colors duration-300">
+              <div key={item.title} className="rounded-xl p-8 border border-stone-700 bg-stone-950/40 hover:border-brand-cyan transition-colors duration-300">
                 <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg border border-stone-700 text-stone-100">
                   <item.icon />
                 </span>
@@ -146,27 +144,27 @@ export default async function HomePage() {
       </section>
 
       {/* CTA BANNER */}
-      <section className="bg-gradient-to-r from-brand-red-dark via-brand-red to-brand-red-light py-24 px-6 md:px-10 text-center">
+      <section className="bg-gradient-to-r from-brand-cyan-dark via-brand-cyan-mid to-brand-cyan py-24 px-6 md:px-10 text-center">
         <div className="max-w-2xl mx-auto rounded-2xl border border-white/25 bg-black/10 px-6 py-10 md:px-10 md:py-12">
-          <p className="mb-4 text-xs uppercase tracking-[0.13em] text-rose-100">
+          <p className="mb-4 text-xs uppercase tracking-[0.13em] text-brand-cyan-light">
             Arena Inmobiliaria · 4,9/5 en Google (43 reseñas)
           </p>
           <h2 className="mb-6 font-display text-4xl font-semibold leading-tight text-white md:text-5xl">
             ¿Listo para encontrar<br />tu próximo hogar?
           </h2>
-          <p className="mb-10 text-lg font-light leading-relaxed text-rose-50">
+          <p className="mb-10 text-lg font-light leading-relaxed text-white/90">
             Cuéntame qué necesitas y prepararemos la mejor estrategia para ti.
           </p>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/contacto"
-              className="inline-flex min-h-[3rem] items-center justify-center rounded-md border border-transparent bg-white px-10 py-3 text-sm font-medium tracking-wide text-brand-red hover:bg-rose-50 transition-colors duration-200"
+              className="inline-flex min-h-[3rem] items-center justify-center rounded-md border border-transparent bg-white px-10 py-3 text-sm font-medium tracking-wide text-brand-cyan-dark hover:bg-brand-cyan-light transition-colors duration-200"
             >
               Hablar con Arena
             </Link>
             <Link
               href="/propiedades"
-              className="inline-flex min-h-[3rem] items-center justify-center rounded-md border border-white px-10 py-3 text-sm font-medium tracking-wide text-white hover:bg-white hover:text-brand-red transition-colors duration-200"
+              className="inline-flex min-h-[3rem] items-center justify-center rounded-md border border-white px-10 py-3 text-sm font-medium tracking-wide text-white hover:bg-white hover:text-brand-cyan-dark transition-colors duration-200"
             >
               Ver propiedades
             </Link>
